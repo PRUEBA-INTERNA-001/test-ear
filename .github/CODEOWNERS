@@ -1,0 +1,3 @@
+# Los equipos DevOps serán los responsables de los workflows
+.github/workflows/* @PRUEBA-INTERNA-001/equipo-devops
+.github/CODEOWNERS @PRUEBA-INTERNA-001/equipo-devops
