@@ -1,0 +1,30 @@
+name: Execution IN (integracion)
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  ACTIONS_RUNNER_DEBUG: true
+  ACTIONS_STEP_DEBUG: true
+  
+jobs:
+  deploy-dev:
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-in.yml@main
+    with:
+      deploy_platform: 'linux'
+      java_version: '11'
+      artifacts_pattern: 'build/ear/HelloWorldEAR.ear'
+      artifacts_name: 'HelloWorldEAR'
+      sonar_enabled: true  # o false, sin comillas
+
+      #Estos son los valores que se utilizan para el deploy en la consola Weblogic
+      server_host: 'weblogic.miempresa.cl'
+      server_port: '7001'
+      weblogic_user: 'adminweblogic'
+      target_name: 'AdminServer'
+      app_name: 'HelloWorldEAR'
+      environment: "desarrollo"
+    secrets: inherit
