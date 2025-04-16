@@ -1,3 +1,4 @@
+<!--Helloword-->
 <project name="HelloWorldEAR" default="build" basedir=".">
     <property name="lib.dir" value="lib"/>
     <property name="ear.dir" value="build/ear"/>
