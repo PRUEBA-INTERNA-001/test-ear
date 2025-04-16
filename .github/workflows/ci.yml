@@ -1,4 +1,4 @@
-name: Execution Weblogic Templates
+name: Execution CI
 
 on:
   push:
