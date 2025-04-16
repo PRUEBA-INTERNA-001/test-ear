@@ -19,7 +19,7 @@ jobs:
     with:
       deploy_platform: 'linux'
       java_version: '11'
-      artifacts_pattern: 'build/HelloWorldEAR.ear'
+      artifacts_pattern: 'build/ear/HelloWorldEAR.ear'
       artifacts_name: 'HelloWorldEAR'
       sonar_enabled: true  # o false, sin comillas
 
