@@ -32,6 +32,7 @@ jobs:
     secrets: inherit
 
   aprobacion-QA:
+    needs: [deploy-cert]
     name: Aprobar versión ${{ inputs.release_tag }} para pasar a PRODUCCIÓN
     uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/aprobacionQA.yml@main
     with:
