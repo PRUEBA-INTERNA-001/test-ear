@@ -36,7 +36,17 @@ jobs:
     uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-cd.yml@main
     with:
       aprobacion_qa: true
-      environment: "certificacion"
+      deploy_platform: 'linux'
+      java_version: '11'
+      artifacts_pattern: 'build/HelloWorldEAR.ear'
+      artifacts_name: 'HelloWorldEAR'
+      sonar_enabled: true
+      server_host: 'weblogic.miempresa.cl'
+      server_port: '7001'
+      weblogic_user: 'adminweblogic'
+      target_name: 'AdminServer'
+      app_name: 'HelloWorldEAR'
+      environment: "qa_aprobado"
       release_tag: ${{ inputs.release_tag }}
     secrets: inherit
 
