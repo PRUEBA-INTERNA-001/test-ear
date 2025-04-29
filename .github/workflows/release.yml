@@ -1,0 +1,22 @@
+name: Execution release
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  ACTIONS_RUNNER_DEBUG: true
+  ACTIONS_STEP_DEBUG: true
+  
+jobs:
+  deploy-dev:
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-ci.yml@main
+    with:
+      deploy_platform: 'wls'
+      artifacts_pattern: 'build/ear/HelloWorldEAR.ear'
+      artifacts_name: 'HelloWorldEAR'
+      environment: "desarrollo"
+      create_release: true
+    secrets: inherit
