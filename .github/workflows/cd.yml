@@ -17,7 +17,7 @@ jobs:
     name: Desplegar versión ${{ inputs.release_tag }} en CERT
     uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-cd.yml@main
     with:
-      deploy_platform: 'linux'
+      deploy_platform: 'wls'
       java_version: '11'
       artifacts_pattern: 'build/ear/HelloWorldEAR.ear'
       artifacts_name: 'HelloWorldEAR'
@@ -46,7 +46,7 @@ jobs:
     needs: [deploy-cert, aprobacion-QA]
     uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-cd.yml@main
     with:
-      deploy_platform: 'linux'
+      deploy_platform: 'wls'
       java_version: '11'
       artifacts_pattern: 'build/HelloWorldEAR.ear'
       artifacts_name: 'HelloWorldEAR'
