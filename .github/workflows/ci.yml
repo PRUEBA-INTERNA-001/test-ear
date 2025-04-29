@@ -17,7 +17,7 @@ jobs:
   deploy-dev:
     uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-ci.yml@main
     with:
-      deploy_platform: 'linux'
+      deploy_platform: 'wls'
       java_version: '11'
       artifacts_pattern: 'build/ear/HelloWorldEAR.ear'
       artifacts_name: 'HelloWorldEAR'
