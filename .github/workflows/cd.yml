@@ -13,10 +13,11 @@ env:
   ACTIONS_STEP_DEBUG: true
 
 jobs:
-  deploy-homo:
+  deploy-cert:
+    name: Desplegar versión ${{ inputs.release_tag }} en CERT
     uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-cd.yml@main
     with:
-      deploy_platform: 'linux'
+      deploy_platform: 'wls'
       java_version: '11'
       artifacts_pattern: 'build/ear/HelloWorldEAR.ear'
       artifacts_name: 'HelloWorldEAR'
@@ -26,15 +27,26 @@ jobs:
       weblogic_user: 'adminweblogic'
       target_name: 'AdminServer'
       app_name: 'HelloWorldEAR'
-      environment: "homologacion"
+      environment: "certificacion"
+      release_tag: ${{ inputs.release_tag }}
+    secrets: inherit
+
+  aprobacion-QA:
+    needs: [deploy-cert]
+    name: Aprobar versión ${{ inputs.release_tag }} para pasar a PRODUCCIÓN
+    uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/aprobacionQA.yml@main
+    with:
+      aprobacion_qa: true
+      environment: "qa_aprobado"
       release_tag: ${{ inputs.release_tag }}
     secrets: inherit
 
   deploy-prod:
-    needs: deploy-homo
+    name: Desplegar versión ${{ inputs.release_tag }} en PRODUCCIÓN
+    needs: [deploy-cert, aprobacion-QA]
     uses: PRUEBA-INTERNA-001/chi-GitHub-Templates/.github/workflows/weblogic-cd.yml@main
     with:
-      deploy_platform: 'linux'
+      deploy_platform: 'wls'
       java_version: '11'
       artifacts_pattern: 'build/HelloWorldEAR.ear'
       artifacts_name: 'HelloWorldEAR'
